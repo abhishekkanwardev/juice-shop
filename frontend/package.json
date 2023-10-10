@@ -3,8 +3,8 @@
   "version": "15.2.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "node init && ng serve",
+    "build": "node init && ng build",
     "test": "ng test",
     "lint": "ng lint",
     "lint:scss": "npx stylelint \"**/*.scss\"",

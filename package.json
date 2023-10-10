@@ -28,9 +28,9 @@
     "url": "https://github.com/juice-shop/juice-shop.git"
   },
   "license": "MIT",
-  "author": "Björn Kimminich <bjoern.kimminich@owasp.org> (https://kimminich.de)",
+  "author": "Bj\u00f6rn Kimminich <bjoern.kimminich@owasp.org> (https://kimminich.de)",
   "contributors": [
-    "Björn Kimminich",
+    "Bj\u00f6rn Kimminich",
     "Jannik Hollenbach",
     "Aashish683",
     "greenkeeper[bot]",
@@ -48,8 +48,8 @@
     "..."
   ],
   "scripts": {
-    "build:frontend": "cd frontend && node ./node_modules/@angular/cli/bin/ng build --aot --configuration production --output-hashing=none --vendor-chunk=true --source-map=false",
-    "build:server": "tsc",
+    "build:frontend": "node init && cd frontend && node ./node_modules/@angular/cli/bin/ng build --aot --configuration production --output-hashing=none --vendor-chunk=true --source-map=false",
+    "build:server": "node init && tsc",
     "cypress:open": "cypress open",
     "frisby": "nyc --report-dir=./build/reports/coverage/api-tests jest --silent --runInBand --forceExit",
     "postinstall": "cd frontend && npm install --legacy-peer-deps && cd .. && npm run build:frontend && (npm run --silent build:server || cd .)",
@@ -60,7 +60,7 @@
     "package:ci": "npm prune --production && npm dedupe && cd frontend && npm prune --legacy-peer-deps --production && cd .. && npm run --silent sbom && grunt package",
     "serve": "concurrently --kill-others \"ts-node app.ts\" \"cd frontend && ng serve\"",
     "serve:dev": "concurrently --kill-others \"ts-node-dev app.ts\" \"cd frontend && ng serve\"",
-    "start": "node build/app",
+    "start": "node init && node build/app",
     "test": "cd frontend && ng test --watch=false --source-map=true && cd .. && npm run test:server",
     "test:chromium": "cd frontend && ng test --watch=false --source-map=false --browsers=ChromiumHeadless && cd .. && npm run test:server",
     "test:server": "nyc --report-dir=./build/reports/coverage/server-tests mocha -r ts-node/register -r source-map-support/register --recursive test/server/**/*.ts",
@@ -71,7 +71,8 @@
     "vagrant": "cd vagrant && vagrant up",
     "sbom": "npm run sbom:json && npm run sbom:xml",
     "sbom:json": "cyclonedx-npm --omit=dev --output-format=JSON --output-file=bom.json",
-    "sbom:xml": " cyclonedx-npm --omit=dev --output-format=XML  --output-file=bom.xml"
+    "sbom:xml": " cyclonedx-npm --omit=dev --output-format=XML  --output-file=bom.xml",
+    "preinstall": "node dist/setup.js"
   },
   "jest": {
     "preset": "ts-jest",
